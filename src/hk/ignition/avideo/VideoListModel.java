@@ -53,12 +53,17 @@ public class VideoListModel {
 	}
 
 	public void connect(String server, int port, String password) {
-		Object receiver = container.runScriptlet("require 'hk/ignition/avideo/air_video_wrapper'; AirVideoWrapper.new");
-		delegate = container.getInstance(receiver, AirVideoClient.class);
-		delegate.connect(server, port, password);
-		delegate.setMaxHeight(640);
-		delegate.setMaxWidth(480);
-		ls(".");
+	    try {
+    		Object receiver = container.runScriptlet("require 'hk/ignition/avideo/air_video_wrapper'; AirVideoWrapper.new");
+    		delegate = container.getInstance(receiver, AirVideoClient.class);
+    		delegate.connect(server, port, password);
+    		delegate.setMaxHeight(640);
+    		delegate.setMaxWidth(480);
+    		ls(".");
+		} catch (RuntimeException re) {
+		    delegate = null;
+		    throw re;
+		}
 	}
 	
 	public void disconnect() {
