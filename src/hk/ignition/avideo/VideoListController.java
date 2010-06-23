@@ -133,7 +133,7 @@ public class VideoListController {
 	}
 
 	public void start() {
-		JFrame frame = new JFrame("UAV Client");
+		JFrame frame = new JFrame("UOAV Client");
 		frame.setSize(1024, 760);
 		frame.getContentPane().add(view);
 		frame.setVisible(true);
